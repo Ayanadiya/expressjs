@@ -1,20 +1,14 @@
 const express = require('express');
-const path= require('path');
 
-const rootdir = require('../util/path');
+const productController= require('../controller/products');
+const shopController= require('../controller/shop');
 
 const router= express.Router();
 
-router.get('/contactus', (req,res,next) => {
-    res.sendFile(path.join(rootdir,'views', 'contact.html'));
-})
+router.get('/contactus', shopController.getContactPage );
 
-router.post('/success', (req, res,next) => {
-    res.json({message:"Form filled Successfully"})
-})
+router.post('/success', shopController.postContactPage);
 
-router.get('/',(req,res,next) => {
-    res.sendFile(path.join(rootdir,'views','shop.html'));
-});
+router.get('/', productController.getProducts);
 
 module.exports=router;
